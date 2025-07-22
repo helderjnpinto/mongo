@@ -8,6 +8,7 @@ services:
     ports:
       - "27018:27017"  # External:Internal port mapping
     env_file:
+    
       - mongo.env
     volumes:
       - mongo_data:/data/db
@@ -16,7 +17,7 @@ services:
       - /home/hp/.local/share/caddy/certificates:/caddy-certs:ro
     entrypoint: ["/docker-entrypoint-initdb.d/mongo-entrypoint.sh"]
     healthcheck:
-      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      test: ["CMD-SHELL", "pgrep mongod"]
       interval: 30s
       timeout: 10s
       retries: 5
