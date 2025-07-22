@@ -13,7 +13,7 @@ services:
       - mongo_data:/data/db
       - mongo_config:/data/configdb
       - ./init/mongo-entrypoint.sh:/docker-entrypoint-initdb.d/mongo-entrypoint.sh:ro
-      - /home/yarilabs/.local/share/caddy/certificates:/caddy-certs:ro
+      - /home/hp/.local/share/caddy/certificates:/caddy-certs:ro
     entrypoint: ["/docker-entrypoint-initdb.d/mongo-entrypoint.sh"]
     healthcheck:
       test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
