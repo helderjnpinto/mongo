@@ -127,7 +127,10 @@ Starting MongoDB with TLS...
 ## ✅ Test Connection Securely
 
 ```bash
+mongo "mongodb://admin:strongpassword@mongo.makerverse.app:27018/?tls=true"
+# or 
 mongo "mongodb://admin:strongpassword@mongo.example.com/?tls=true&authSource=admin"
+
 ```
 
 Make sure MongoDB is not reachable on port `27017` unless through Caddy.
