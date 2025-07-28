@@ -12,9 +12,9 @@ services:
     volumes:
       - mongo_data:/data/db
       - mongo_config:/data/configdb
-      - ./init/mongo-entrypoint.sh:/docker-entrypoint-initdb.d/mongo-entrypoint.sh:ro
-      - /home/hp/.local/share/caddy/certificates:/caddy-certs:ro
-    entrypoint: ["/docker-entrypoint-initdb.d/mongo-entrypoint.sh"]
+      - ./entrypoint.sh:/entrypoint.sh:ro  # new entrypoint
+      - /var/lib/caddy/.local/share/caddy/certificates:/caddy-certs:ro
+    entrypoint: ["/entrypoint.sh"]
     healthcheck:
       test: ["CMD-SHELL", "pgrep mongod"]
       interval: 30s

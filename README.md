@@ -39,10 +39,16 @@ Your Caddy should already be configured like this (replace with your actual doma
 **Caddyfile**
 
 ```caddyfile
-mongo.example.com {
-  reverse_proxy localhost:27018
-  tls your@email.com
+/etc/caddy/Caddyfile
+
+mongo.makerverse.app {
+  handle {
+    respond "MongoDB TLS" 200
+  }
+
+  tls hello@makerverse.app
 }
+
 ```
 
 Run Caddy once to get certs issued:
@@ -60,8 +66,7 @@ project/
 │
 ├── docker-compose.yml
 ├── mongo.env
-├── init/
-│   └── mongo-entrypoint.sh
+├── entrypoint.sh
 ```
 
 ---
@@ -75,21 +80,21 @@ MONGO_INITDB_ROOT_PASSWORD=strongpassword
 
 ---
 
-### 🔹 4. `init/mongo-entrypoint.sh`
+### 🔹 4. `entrypoint.sh`
 
 > ✅ This script waits for certs to be ready and prepares the `.pem` dynamically.
 
 Make it executable:
 
 ```bash
-chmod +x init/mongo-entrypoint.sh
+chmod +x entrypoint.sh
 ```
 
 ---
 
 ### 🔹 5. `docker-compose.yml`
 
-> 🔐 Change `/home/yarilabs/.local/share/caddy/certificates` if your Caddy is in a different path.
+> 🔐 Change `/home/hp/.local/share/caddy/certificates` if your Caddy is in a different path.
 
 ---
 
