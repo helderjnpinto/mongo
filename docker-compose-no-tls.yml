@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:8.0
+    container_name: mongo
+    restart: always
+    ports:
+      - "27018:27017" # External:Internal port mapping
+    env_file:
+      - mongo.env
+    volumes:
+      - mongo_data:/data/db
+      - mongo_config:/data/configdb
+    entrypoint: ["/entrypoint.sh"]
+    healthcheck:
+      test: ["CMD-SHELL", "pgrep mongod"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - mongo_net
+
+volumes:
+  mongo_data:
+  mongo_config:
+
+networks:
+  mongo_net:
+    driver: bridge
